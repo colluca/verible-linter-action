@@ -40,6 +40,11 @@ inputs:
   verible_version:
     description: 'Use selected Verible version (defaults to latest release)'
     default: 'latest'
+  artifact_name:
+    description: 'Artifact name for the uploaded linter log. Use a unique value
+                  per job to avoid collisions'
+    required: false
+    default: 'verible-linter'
 
 runs:
   using: 'composite'
@@ -81,5 +86,5 @@ runs:
     - name: Upload linter log
       uses: actions/upload-artifact@v4
       with:
-        name: verible-linter
+        name: ${{ inputs.artifact_name }}
         path: ${{ inputs.log_file }}
